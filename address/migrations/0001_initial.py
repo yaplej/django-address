@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
+import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
@@ -56,7 +57,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('name', models.CharField(max_length=165, blank=True)),
                 ('code', models.CharField(max_length=3, blank=True)),
-                ('country', models.ForeignKey(on_delete=models.CASCADE, related_name='states', to='address.Country')),
+                ('country', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='states', to='address.Country')),
             ],
             options={
                 'ordering': ('country', 'name'),
@@ -65,12 +66,12 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='locality',
             name='state',
-            field=models.ForeignKey(on_delete=models.CASCADE, related_name='localities', to='address.State'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='localities', to='address.State'),
         ),
         migrations.AddField(
             model_name='address',
             name='locality',
-            field=models.ForeignKey(on_delete=models.CASCADE, related_name='addresses', blank=True, to='address.Locality', null=True),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='addresses', blank=True, to='address.Locality', null=True),
         ),
         migrations.AlterUniqueTogether(
             name='state',
